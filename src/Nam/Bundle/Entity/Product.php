@@ -124,5 +124,15 @@ class Product
     {
         return $this->description;
     }
+
+    /**
+     * Get Class Name
+     *
+     * @return string
+     */
+    public static function getClass()
+    {
+        return get_class();
+    }
 }
 

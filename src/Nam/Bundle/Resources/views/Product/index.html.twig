@@ -1,28 +1,42 @@
-{% extends "::base.html.twig" %}
+{% extends "NamBundle:Default:base.html.twig" %}
 
 {% block title %}NamBundle:Product:Index{% endblock %}
 
 {% block body %}
     <h1>Welcome to the Product:Index page</h1>
-    <div class="row">
-        <div class="column" style="background-color:#aaa;">
-            <h2>Column 1</h2>
-            <p>Some text..</p>
-        </div>
-        <div class="column" style="background-color:#bbb;">
-            <h2>Column 2</h2>
-            <p>Some text..</p>
-        </div>
-    </div>
+    <div class="container">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
 
-    <div class="row">
-        <div class="column" style="background-color:#ccc;">
-            <h2>Column 3</h2>
-            <p>Some text..</p>
-        </div>
-        <div class="column" style="background-color:#ddd;">
-            <h2>Column 4</h2>
-            <p>Some text..</p>
-        </div>
+        <a href="{{ path('nam_bundle_product_create') }}">Create</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>
+                            <a href="{{ path('nam_bundle_product_update', {'id':product.id}) }}">Edit</a>
+                            <form action="{{ url('nam_bundle_product_delete', { 'id':product.id }) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete_product') }}" />
+                                <button type="submit">Delete item</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

@@ -1,7 +1,31 @@
-{% extends "::base.html.twig" %}
+{% extends "NamBundle:Default:base.html.twig" %}
 
-{% block title %}NamBundle:Product:Update{% endblock %}
+{% block title %}NamBundle:Product:Index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Product:Update page</h1>
+    <h1>Welcome to the Product:Index page</h1>
+
+    <div class="container">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
+        <form name="form" method="post">
+            <div class="form-group">
+                <label for="form_name">Name</label>
+                <input type="text" class="form-control" id="form_name" name="form[name]" required="required" placeholder="Default input" value="{{ product.name }}">
+                <small id="form_name" class="form-text text-muted">Name of product.</small>
+            </div>
+            <div class="form-group">
+                <label for="form_price">Price</label>
+                <input type="number" class="form-control" id="form_price" name="form[price]" required="required" placeholder="0" value="{{ product.price }}">
+                <small id="form_price" class="form-text text-muted">Product price ($).</small>
+            </div>
+            <div class="form-group">
+                <label for="form_description">Description</label>
+                <input type="text" class="form-control" id="form_description" name="form[description]" required="required" placeholder="Description" value="{{ product.description }}">
+                <small id="form_description" class="form-text text-muted">More detail about product.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" id="form__token" name="form[token]" value="{{ csrf_token('authenticate') }}">
+        </form>
+    </div>
 {% endblock %}
